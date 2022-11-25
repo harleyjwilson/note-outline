@@ -1,0 +1,5 @@
+.vscode
+.DS_Store
+build/
+note_outline.egg-info
+**/__pycache__
