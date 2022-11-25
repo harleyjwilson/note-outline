@@ -38,7 +38,7 @@ Then I wrote my second [[202211251045]] and third [[202211251152]] note.
 We are now at the end.
 ```
 
-To being those notes into my outline for quick reference I can use note_outline to give the following result
+To bring those notes into my outline for quick reference I can use note_outline with the following command `note_outline -f "202211251217 Outline.md" -o "202211251378 Draft.md"
 
 ```202211251378 Draft.md
 # 202211251217 Outline
