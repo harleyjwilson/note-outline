@@ -24,7 +24,6 @@ def create_cli():
         # "output",
         "-o",
         "--output",
-        required=True,
         type=str,
         help="output file"
     )

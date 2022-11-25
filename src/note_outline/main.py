@@ -21,7 +21,6 @@ def main():
             dir += "./"
 
         filename = os.path.basename(args.file)
-        output = args.output
     except UnboundLocalError:
         pass
 
@@ -32,11 +31,16 @@ def main():
     linked_file_names = get_file_names(dir, file_text)
     print("Found " + str(count_links(linked_file_names)) + " internal links")
 
-    print("Compiling text for " + output)
+    print("Compiling text")
     output_file = compile_output_file(dir, file_text, linked_file_names)
-
-    print("Writing " + output)
-    write_file((dir + output), output_file)
+    
+    if args.output is not None:
+        print("Writing " + args.output)
+        write_file((dir + args.output), output_file)
+    else:
+        print("Writing to standard output\n")
+        for line in output_file:
+            print(line, end="")
 
     print("Done")
 
