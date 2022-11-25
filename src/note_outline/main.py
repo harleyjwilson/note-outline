@@ -11,10 +11,15 @@ def main():
         args = create_cli()
     except SystemExit:
         pass
-
-    # Assign input variables
+   
     try:
-        dir = os.path.dirname(args.file) + "/"
+        dir = os.path.dirname(args.file)
+        
+        if dir[:1] == "/":
+            dir += "/"
+        else:
+            dir += "./"
+
         filename = os.path.basename(args.file)
         output = args.output
     except UnboundLocalError:
