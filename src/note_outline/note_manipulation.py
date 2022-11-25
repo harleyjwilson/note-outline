@@ -12,7 +12,9 @@ def get_links(file_text):
         if matches:
             links.update({no: matches})
 
-    links.pop(0)
+    if 0 in links:
+        links.pop(0)
+        
     return links
 
 
