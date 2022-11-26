@@ -30,6 +30,7 @@ def main():
             print(e)
 
         if args.delete is not None:
+            print("Removing outline comments")
             output_file = clean_outline_file(file_text)
         else:
             print("Parsing text from " + filename)
