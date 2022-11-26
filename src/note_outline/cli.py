@@ -1,35 +1,45 @@
 import argparse
 
+
 def create_cli():
     parser = argparse.ArgumentParser(
         description="A tool to compile an outline from notes in your zettelkasten."
     )
     parser.add_argument(
-        # "file", 
-        "-f", 
-        "--file", 
-        required=True,
+        "file",
         type=str,
         help="an outline file"
     )
-    # parser.add_argument(
-    #     # "archive",
-    #     "-a",
-    #     "--archive",
-    #     required=True,
-    #     type=str,
-    #     help="path to your zettelkasten"
-    # )
     parser.add_argument(
-        # "output",
         "-o",
         "--output",
         type=str,
-        help="output file"
+        default=None,
+        help="an output file"
+    )
+    parser.add_argument(
+        "-i",
+        "--inplace",
+        default=None,
+        action="store_true",
+        help="save outline file in place (overriding original file)"
     )
     parser.add_argument('-v', '--version', action='version',
                         version='%(prog)s 0.0.1')
-    args = parser.parse_args()
-    
-    return args  
+    args = None
+    try:
+        args = parser.parse_args()
+    except SystemExit:
+        pass
 
+    return args
+
+
+def validate_cli(args):
+    count = 0
+    for arg in [args.output, args.inplace]:
+        if arg:
+            count += 1
+
+    if count > 1:
+        raise Exception("Please enter only one optional argument.")
