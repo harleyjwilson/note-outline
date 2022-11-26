@@ -12,12 +12,7 @@ def main():
     try:
         validate_cli(args)
         try:
-            dir = os.path.dirname(args.file)
-
-            if dir[:1] == "/":
-                dir += "/"
-            else:
-                dir += "./"
+            dir = os.path.dirname(args.file) + "/"
 
             filename = os.path.basename(args.file)
         except UnboundLocalError:

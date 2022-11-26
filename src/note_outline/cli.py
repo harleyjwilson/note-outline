@@ -1,5 +1,5 @@
 import argparse
-
+import os
 
 def create_cli():
     parser = argparse.ArgumentParser(
@@ -7,7 +7,7 @@ def create_cli():
     )
     parser.add_argument(
         "file",
-        type=str,
+        type=os.path.abspath,
         help="an outline file"
     )
     parser.add_argument(
