@@ -31,7 +31,7 @@ def main():
         print(e)
 
     print("Parsing text from " + filename)
-    linked_file_names = get_file_names(dir, file_text)
+    linked_file_names = get_file_names(dir, filename, file_text)
     print("Found " + str(count_links(linked_file_names)) + " internal links")
 
     print("Compiling text")

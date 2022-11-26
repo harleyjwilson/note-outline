@@ -4,16 +4,18 @@ import os
 from src.note_outline.file_io import read_file
 
 
-def get_links(file_text):
+def get_links(filename, file_text):
+    file_uid = ''.join(re.findall('[0-9]{12}', filename))
     pattern = '\[\[[0-9]{12}\]\]'
     links = {}
     for no, line in enumerate(file_text):
         matches = re.findall(pattern, line)
         if matches:
+            for match in matches:
+                temp = match.strip('[[]]')
+                if match.strip('[[]]') == file_uid:
+                    matches.remove(match)
             links.update({no: matches})
-
-    if 0 in links:
-        links.pop(0)
         
     return links
 
@@ -28,8 +30,8 @@ def count_links(links):
     return count
 
 
-def get_file_names(dir, file_text):
-    links = get_links(file_text)
+def get_file_names(dir, filename, file_text):
+    links = get_links(filename, file_text)
     file_names = {}
     files_in_dir = set()
 
@@ -58,7 +60,7 @@ def compile_output_file(dir, file_text, file_names):
                 output_file.append("    " + file + "\n")
                 linked_file_text = read_file(dir + file)
                 
-                if linked_file_text[-1][-1:] is not "\n":
+                if linked_file_text[-1][-1:] != "\n":
                     linked_file_text.append("\n")
                     
                 for linked_lines in linked_file_text:
