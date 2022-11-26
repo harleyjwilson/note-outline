@@ -16,7 +16,7 @@ def get_links(filename, file_text):
                 if match.strip('[[]]') == file_uid:
                     matches.remove(match)
             links.update({no: matches})
-        
+
     return links
 
 
@@ -59,12 +59,25 @@ def compile_output_file(dir, file_text, file_names):
                 output_file.append("<!--\n")
                 output_file.append("    " + file + "\n")
                 linked_file_text = read_file(dir + file)
-                
+
                 if linked_file_text[-1][-1:] != "\n":
                     linked_file_text.append("\n")
-                    
+
                 for linked_lines in linked_file_text:
                     output_file.append("    " + linked_lines)
                 output_file.append("-->\n")
 
     return output_file
+
+
+def clean_outline_file(file_text):
+    in_comment = False
+    outfile_text = []
+    for line in file_text:
+        if line == "<!--\n":
+            in_comment = True
+        if not in_comment:
+            outfile_text.append(line)
+        elif line == "-->\n":
+            in_comment = False
+    return outfile_text

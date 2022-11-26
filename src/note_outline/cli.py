@@ -24,6 +24,13 @@ def create_cli():
         action="store_true",
         help="save outline file in place (overriding original file)"
     )
+    parser.add_argument(
+        "-d",
+        "--delete",
+        default=None,
+        action="store_true",
+        help="delete outline comments from file"
+    )
     parser.add_argument('-v', '--version', action='version',
                         version='%(prog)s 0.0.1')
     args = None
@@ -37,6 +44,7 @@ def create_cli():
 
 def validate_cli(args):
     count = 0
+
     for arg in [args.output, args.inplace]:
         if arg:
             count += 1
