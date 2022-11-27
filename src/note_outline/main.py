@@ -24,9 +24,11 @@ def main():
         except FileNotFoundError as e:
             print(e)
 
+        print("Removing previous outline comments (if exists)")
+        file_text = clean_outline_file(file_text)
+
         if args.delete is not None:
-            print("Removing outline comments")
-            output_file = clean_outline_file(file_text)
+            output_file = file_text
         else:
             print("Parsing text from " + filename)
             linked_file_names = get_file_names(dir, filename, file_text)
